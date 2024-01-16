@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Wallaby Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Animal Wallaby Game</h1>
+
+<button onclick="startGame()">Start Game</button>
+
+<script>
+  let wallaby = {
+    name: 'Wally the Wallaby',
+    hunger: 50,
+    happiness: 50
+  };
+
+  function startGame() {
+    alert(`Welcome to the Animal Wallaby Game! Meet ${wallaby.name}.`);
+    while (wallaby.hunger > 0 && wallaby.happiness > 0) {
+      showStatus();
+      const action = prompt('What do you want to do? (feed/play/quit)');
+      if (action.toLowerCase() === 'feed') {
+        feedWallaby();
+      } else if (action.toLowerCase() === 'play') {
+        playWithWallaby();
+      } else if (action.toLowerCase() === 'quit') {
+        endGame();
+        break;
+      } else {
+        alert('Invalid action. Please enter feed, play, or quit.');
+      }
+    }
+  }
+
+  function showStatus() {
+    alert(`Status of ${wallaby.name}: Hunger: ${wallaby.hunger}, Happiness: ${wallaby.happiness}`);
+  }
+
+  function feedWallaby() {
+    const food = Math.floor(Math.random() * 10) + 1;
+    wallaby.hunger -= food;
+    alert(`${wallaby.name} is fed. Hunger decreases by ${food}.`);
+    updateHappiness();
+  }
+
+  function playWithWallaby() {
+    const fun = Math.floor(Math.random() * 10) + 1;
+    wallaby.happiness += fun;
+    alert(`${wallaby.name} is happy. Happiness increases by ${fun}.`);
+    updateHunger();
+  }
+
+  function updateHunger() {
+    wallaby.hunger += 5;
+    if (wallaby.hunger > 100) {
+      wallaby.hunger = 100;
+    }
+  }
+
+  function updateHappiness() {
+    wallaby.happiness -= 5;
+    if (wallaby.happiness < 0) {
+      wallaby.happiness = 0;
+    }
+  }
+
+  function endGame() {
+    alert('Game over. Thanks for playing!');
+  }
+</script>
+
+</body>
+</html>
